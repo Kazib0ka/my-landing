@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Грузинская Кухня · Georgian Cuisine</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Analytics placeholder: replace with your tracking code -->
+<!-- Google Analytics: <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script> -->
+<!-- Yandex Metrica: paste counter code here -->
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8D5A3;
+    --dark: #0D0C0A;
+    --dark-2: #161410;
+    --dark-3: #1F1C17;
+    --dark-4: #2A2620;
+    --text: #F0EAD6;
+    --text-muted: #9C8E70;
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── BACKGROUNDS ─── */
+  .bg-hero {
+    background-image:
+      linear-gradient(to bottom, rgba(13,12,10,0.3) 0%, rgba(13,12,10,0.6) 60%, rgba(13,12,10,0.95) 100%),
+      url('https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=1200&q=80');
+    background-size: cover; background-position: center;
+  }
+  .bg-khinkali {
+    background-image: linear-gradient(rgba(13,12,10,0.55),rgba(13,12,10,0.85)),
+      url('https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&q=80');
+    background-size: cover; background-position: center;
+  }
+  .bg-flour {
+    background-image: linear-gradient(rgba(13,12,10,0.55),rgba(13,12,10,0.85)),
+      url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80');
+    background-size: cover; background-position: center;
+  }
+  .bg-pastry {
+    background-image: linear-gradient(rgba(13,12,10,0.55),rgba(13,12,10,0.85)),
+      url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80');
+    background-size: cover; background-position: center;
+  }
+  .bg-cold {
+    background-image: linear-gradient(rgba(13,12,10,0.55),rgba(13,12,10,0.85)),
+      url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80');
+    background-size: cover; background-position: center;
+  }
+  .bg-hot {
+    background-image: linear-gradient(rgba(13,12,10,0.55),rgba(13,12,10,0.85)),
+      url('https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&q=80');
+    background-size: cover; background-position: center;
+  }
+  .bg-grill {
+    background-image: linear-gradient(rgba(13,12,10,0.55),rgba(13,12,10,0.85)),
+      url('https://images.unsplash.com/photo-1558030006-450675393462?w=800&q=80');
+    background-size: cover; background-position: center;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px;
+    background: linear-gradient(to bottom, rgba(13,12,10,0.9), transparent);
+    backdrop-filter: blur(4px);
+  }
+
+  .burger {
+    background: none; border: none; cursor: pointer;
+    width: 44px; height: 44px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition);
+  }
+  .burger:hover { background: rgba(201,169,110,0.15); }
+  .burger span {
+    display: block; width: 22px; height: 1.5px;
+    background: var(--gold-light);
+    transition: var(--transition);
+  }
+  .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 600; color: var(--gold);
+    letter-spacing: 0.05em; text-decoration: none;
+  }
+
+  .lang-switcher { display: flex; gap: 6px; }
+  .lang-btn {
+    background: none; border: none; cursor: pointer;
+    width: 36px; height: 28px; border-radius: 4px; overflow: hidden;
+    opacity: 0.5; transition: opacity var(--transition), transform var(--transition);
+    padding: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 22px; line-height: 1;
+  }
+  .lang-btn:hover { opacity: 0.85; transform: scale(1.08); }
+  .lang-btn.active { opacity: 1; outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar-overlay {
+    position: fixed; inset: 0; z-index: 90;
+    background: rgba(13,12,10,0.7);
+    opacity: 0; pointer-events: none;
+    transition: opacity var(--transition);
+  }
+  .sidebar-overlay.open { opacity: 1; pointer-events: all; }
+
+  .sidebar {
+    position: fixed; top: 0; left: 0; bottom: 0; z-index: 95;
+    width: min(300px, 85vw);
+    background: var(--dark-3);
+    border-right: 1px solid rgba(201,169,110,0.15);
+    transform: translateX(-100%);
+    transition: transform var(--transition);
+    padding: 80px 0 40px;
+    display: flex; flex-direction: column;
+  }
+  .sidebar.open { transform: translateX(0); }
+
+  .sidebar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-weight: 400; letter-spacing: 0.2em;
+    color: var(--text-muted); text-transform: uppercase;
+    padding: 0 24px 16px;
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+    margin-bottom: 8px;
+  }
+
+  .sidebar-link {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 24px;
+    text-decoration: none; color: var(--text);
+    font-size: 15px; font-weight: 300; letter-spacing: 0.03em;
+    transition: background var(--transition), color var(--transition);
+    border-left: 2px solid transparent;
+  }
+  .sidebar-link:hover {
+    background: rgba(201,169,110,0.08);
+    color: var(--gold-light);
+    border-left-color: var(--gold);
+  }
+  .sidebar-link .icon { font-size: 18px; opacity: 0.6; }
+
+  /* ─── HERO ─── */
+  #home {
+    min-height: 100svh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+    padding: 0 20px 48px;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400;
+    margin-bottom: 18px;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 9vw, 56px);
+    font-weight: 600; line-height: 1.25;
+    color: var(--text);
+    margin-bottom: 48px;
+  }
+  .hero-title .brand {
+    display: block;
+    font-style: italic; color: var(--gold);
+    font-size: clamp(40px, 11vw, 68px);
+    letter-spacing: 0.02em;
+    margin-top: 4px;
+  }
+
+  /* ─── CATEGORY BUTTONS ─── */
+  .categories {
+    display: flex; flex-direction: column; gap: 10px;
+    width: 100%; max-width: 480px;
+    text-align: left;
+  }
+
+  .cat-btn {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 20px;
+    background: rgba(22,20,16,0.85);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: var(--radius-md);
+    cursor: pointer; text-decoration: none;
+    color: var(--text);
+    backdrop-filter: blur(12px);
+    transition: border-color var(--transition), background var(--transition), transform var(--transition);
+    animation: fadeUp 0.5s ease both;
+  }
+  .cat-btn:hover {
+    border-color: var(--gold);
+    background: rgba(201,169,110,0.08);
+    transform: translateX(4px);
+  }
+  .cat-btn:nth-child(1) { animation-delay: 0.05s; }
+  .cat-btn:nth-child(2) { animation-delay: 0.10s; }
+  .cat-btn:nth-child(3) { animation-delay: 0.15s; }
+  .cat-btn:nth-child(4) { animation-delay: 0.20s; }
+  .cat-btn:nth-child(5) { animation-delay: 0.25s; }
+  .cat-btn:nth-child(6) { animation-delay: 0.30s; }
+
+  .cat-left { display: flex; align-items: center; gap: 14px; }
+  .cat-icon { font-size: 22px; line-height: 1; }
+  .cat-info {}
+  .cat-name {
+    font-size: 16px; font-weight: 400; letter-spacing: 0.02em;
+    display: block; margin-bottom: 2px;
+  }
+  .cat-count {
+    font-size: 12px; color: var(--text-muted); font-weight: 300;
+    display: block;
+  }
+  .cat-arrow { color: var(--gold); font-size: 18px; opacity: 0.6; transition: opacity var(--transition); }
+  .cat-btn:hover .cat-arrow { opacity: 1; }
+
+  /* ─── SECTION PAGE ─── */
+  .section-page {
+    display: none;
+    min-height: 100svh;
+  }
+  .section-page.active { display: block; }
+
+  .section-hero {
+    min-height: 35vh; position: relative;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 80px 20px 28px;
+  }
+
+  .back-btn {
+    position: absolute; top: 70px; left: 16px;
+    background: rgba(22,20,16,0.8); border: 1px solid rgba(201,169,110,0.25);
+    border-radius: 50px; padding: 8px 16px;
+    color: var(--gold); font-size: 13px; cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    transition: var(--transition);
+    backdrop-filter: blur(8px);
+  }
+  .back-btn:hover { background: rgba(201,169,110,0.12); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 9vw, 56px); font-weight: 600; line-height: 1.1;
+    color: var(--text);
+  }
+  .section-title em { color: var(--gold); font-style: italic; }
+  .section-desc {
+    font-size: 13px; color: var(--text-muted); font-weight: 300;
+    margin-top: 6px; line-height: 1.6;
+  }
+
+  /* ─── RECIPE GRID ─── */
+  .recipe-grid {
+    padding: 24px 16px 48px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  @media (min-width: 640px) {
+    .recipe-grid { grid-template-columns: repeat(3, 1fr); padding: 32px 24px 64px; gap: 16px; }
+  }
+  @media (min-width: 1024px) {
+    .recipe-grid { grid-template-columns: repeat(4, 1fr); max-width: 1100px; margin: 0 auto; }
+  }
+
+  .recipe-card {
+    background: var(--dark-3);
+    border: 1px solid rgba(201,169,110,0.12);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color var(--transition), transform var(--transition);
+    animation: fadeUp 0.4s ease both;
+  }
+  .recipe-card:hover {
+    border-color: rgba(201,169,110,0.4);
+    transform: translateY(-3px);
+  }
+
+  .card-img {
+    aspect-ratio: 4/3;
+    background: var(--dark-4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    position: relative; overflow: hidden;
+  }
+  .card-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,12,10,0.6), transparent);
+  }
+  .card-placeholder-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-muted); position: relative; z-index: 1;
+  }
+
+  .card-body { padding: 12px 14px 16px; }
+  .card-name {
+    font-size: 14px; font-weight: 400; line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .card-meta {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; color: var(--text-muted);
+  }
+  .card-dot { width: 3px; height: 3px; background: var(--gold); border-radius: 50%; opacity: 0.5; }
+
+  .card-tag {
+    display: inline-block;
+    background: rgba(201,169,110,0.1);
+    color: var(--gold);
+    font-size: 10px; letter-spacing: 0.08em;
+    padding: 3px 8px; border-radius: 20px;
+    margin-top: 8px;
+  }
+
+  /* ─── DESKTOP LAYOUT ─── */
+  @media (min-width: 768px) {
+    #home { padding: 0 48px 64px; }
+    .categories { max-width: 420px; }
+    .recipe-grid { padding: 32px 48px 80px; }
+    .section-hero { padding: 96px 48px 36px; }
+    .back-btn { left: 44px; }
+  }
+
+  @media (min-width: 1200px) {
+    #home { padding: 0; }
+    .categories { max-width: 420px; }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.6s ease 0.1s both; }
+  .hero-title   { animation: fadeUp 0.6s ease 0.2s both; }
+  .categories   { animation: fadeUp 0.6s ease 0.4s both; }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--dark-4); border-radius: 2px; }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  /* ─── RECIPE MODAL ─── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 190;
+    background: rgba(13,12,10,0.75);
+    backdrop-filter: blur(2px);
+    opacity: 0; pointer-events: none;
+    transition: opacity var(--transition);
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .recipe-modal {
+    position: fixed; z-index: 195;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%) scale(0.96);
+    width: min(440px, 92vw);
+    max-height: 85vh;
+    overflow-y: auto;
+    background: var(--dark-3);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px 28px;
+    opacity: 0; pointer-events: none;
+    transition: opacity var(--transition), transform var(--transition);
+  }
+  .recipe-modal.open {
+    opacity: 1; pointer-events: all;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: rgba(201,169,110,0.1); border: none;
+    width: 32px; height: 32px; border-radius: 50%;
+    color: var(--gold-light); font-size: 14px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background var(--transition);
+  }
+  .modal-close:hover { background: rgba(201,169,110,0.2); }
+
+  .modal-emoji { font-size: 40px; margin-bottom: 12px; }
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 600; color: var(--text);
+    margin-bottom: 4px; padding-right: 24px;
+  }
+  .modal-tag {
+    display: inline-block;
+    background: rgba(201,169,110,0.1); color: var(--gold);
+    font-size: 11px; letter-spacing: 0.08em;
+    padding: 4px 10px; border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .modal-section-label {
+    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400;
+    margin: 18px 0 10px;
+  }
+  .modal-ing-list { list-style: none; }
+  .modal-ing-list li {
+    font-size: 14px; font-weight: 300; line-height: 1.8;
+    color: var(--text); padding-left: 14px; position: relative;
+  }
+  .modal-ing-list li.sub-header {
+    color: var(--gold-light); font-weight: 500;
+    padding-left: 0; margin-top: 10px;
+    font-family: 'Cormorant Garamond', serif; font-size: 16px;
+  }
+  .modal-ing-list li:not(.sub-header)::before {
+    content: '—'; position: absolute; left: 0; color: var(--text-muted);
+  }
+
+  .modal-steps-list { list-style: none; counter-reset: step-counter; }
+  .modal-steps-list li {
+    font-size: 14px; font-weight: 300; line-height: 1.7;
+    color: var(--text); padding-left: 28px; position: relative;
+    margin-bottom: 14px; counter-increment: step-counter;
+  }
+  .modal-steps-list li::before {
+    content: counter(step-counter);
+    position: absolute; left: 0; top: -1px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: rgba(201,169,110,0.15); color: var(--gold);
+    font-size: 11px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal-steps-list li .step-prefix {
+    color: var(--gold-light); font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header>
+  <button class="burger" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <a href="#" class="logo" onclick="showHome(event)" data-i18n="logo">სამზარეულო</a>
+
+  <div class="lang-switcher" role="group" aria-label="Выбор языка">
+    <button class="lang-btn active" id="langRu" onclick="setLang('ru')" aria-label="Русский" title="Русский">🇷🇺</button>
+    <button class="lang-btn" id="langEs" onclick="setLang('es')" aria-label="Español" title="Español">🇪🇸</button>
+  </div>
+</header>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<nav class="sidebar" id="sidebar" aria-label="Основная навигация">
+  <p class="sidebar-title" data-i18n="nav_title">Разделы</p>
+  <a href="#" class="sidebar-link" onclick="showHome(event)">
+    <span class="icon">🏠</span><span data-i18n="nav_home">Главная</span>
+  </a>
+  <a href="#" class="sidebar-link" onclick="showSection(event,'flour')">
+    <span class="icon">🌾</span><span data-i18n="cat_flour">Мучной цех</span>
+  </a>
+  <a href="#" class="sidebar-link" onclick="showSection(event,'khinkali')">
+    <span class="icon">🥟</span><span data-i18n="cat_khinkali">Хинкали</span>
+  </a>
+  <a href="#" class="sidebar-link" onclick="showSection(event,'pastry')">
+    <span class="icon">🍰</span><span data-i18n="cat_pastry">Кондитерский цех</span>
+  </a>
+  <a href="#" class="sidebar-link" onclick="showSection(event,'cold')">
+    <span class="icon">🥗</span><span data-i18n="cat_cold">Холодный цех</span>
+  </a>
+  <a href="#" class="sidebar-link" onclick="showSection(event,'hot')">
+    <span class="icon">🔥</span><span data-i18n="cat_hot">Горячий цех</span>
+  </a>
+  <a href="#" class="sidebar-link" onclick="showSection(event,'grill')">
+    <span class="icon">🍖</span><span data-i18n="cat_grill">Шашлык</span>
+  </a>
+</nav>
+
+<!-- ═══════════════ HOME ═══════════════ -->
+<div id="homeView" class="bg-hero" style="min-height:100svh; display:flex; flex-direction:column;">
+  <section id="home" aria-label="Главная страница">
+    <div class="hero-content">
+      <p class="hero-eyebrow" data-i18n="hero_eyebrow">Грузинская Кухня · Кулинарная книга</p>
+      <h1 class="hero-title">
+        <span data-i18n="hero_title_line1">Рецепты ресторана</span>
+        <span class="brand">Batumi</span>
+      </h1>
+    </div>
+
+    <nav class="categories" aria-label="Категории рецептов">
+      <a href="#" class="cat-btn" onclick="showSection(event,'flour')">
+        <div class="cat-left">
+          <span class="cat-icon">🌾</span>
+          <div class="cat-info">
+            <span class="cat-name" data-i18n="cat_flour">Мучной цех</span>
+            <span class="cat-count" data-i18n="cat_flour_desc">Хачапури, лобиани, пури</span>
+          </div>
+        </div>
+        <span class="cat-arrow">→</span>
+      </a>
+
+      <a href="#" class="cat-btn" onclick="showSection(event,'khinkali')">
+        <div class="cat-left">
+          <span class="cat-icon">🥟</span>
+          <div class="cat-info">
+            <span class="cat-name" data-i18n="cat_khinkali">Хинкали</span>
+            <span class="cat-count" data-i18n="cat_khinkali_desc">Классические и авторские</span>
+          </div>
+        </div>
+        <span class="cat-arrow">→</span>
+      </a>
+
+      <a href="#" class="cat-btn" onclick="showSection(event,'pastry')">
+        <div class="cat-left">
+          <span class="cat-icon">🍰</span>
+          <div class="cat-info">
+            <span class="cat-name" data-i18n="cat_pastry">Кондитерский цех</span>
+            <span class="cat-count" data-i18n="cat_pastry_desc">Сладости и десерты</span>
+          </div>
+        </div>
+        <span class="cat-arrow">→</span>
+      </a>
+
+      <a href="#" class="cat-btn" onclick="showSection(event,'cold')">
+        <div class="cat-left">
+          <span class="cat-icon">🥗</span>
+          <div class="cat-info">
+            <span class="cat-name" data-i18n="cat_cold">Холодный цех</span>
+            <span class="cat-count" data-i18n="cat_cold_desc">Закуски, салаты, пхали</span>
+          </div>
+        </div>
+        <span class="cat-arrow">→</span>
+      </a>
+
+      <a href="#" class="cat-btn" onclick="showSection(event,'hot')">
+        <div class="cat-left">
+          <span class="cat-icon">🔥</span>
+          <div class="cat-info">
+            <span class="cat-name" data-i18n="cat_hot">Горячий цех</span>
+            <span class="cat-count" data-i18n="cat_hot_desc">Чакапули, харчо, сациви</span>
+          </div>
+        </div>
+        <span class="cat-arrow">→</span>
+      </a>
+
+      <a href="#" class="cat-btn" onclick="showSection(event,'grill')">
+        <div class="cat-left">
+          <span class="cat-icon">🍖</span>
+          <div class="cat-info">
+            <span class="cat-name" data-i18n="cat_grill">Шашлык</span>
+            <span class="cat-count" data-i18n="cat_grill_desc">Мцвади и маринады</span>
+          </div>
+        </div>
+        <span class="cat-arrow">→</span>
+      </a>
+    </nav>
+  </section>
+</div>
+
+<!-- ═══════════════ SECTION PAGES ═══════════════ -->
+<div id="sectionView" style="display:none;"></div>
+
+<!-- ═══════════════ RECIPE MODAL ═══════════════ -->
+<div class="modal-overlay" id="recipeOverlay" onclick="closeRecipe()"></div>
+<div class="recipe-modal" id="recipeModal" role="dialog" aria-modal="true" aria-labelledby="recipeModalTitle">
+  <button class="modal-close" onclick="closeRecipe()" aria-label="Закрыть">✕</button>
+  <div id="recipeModalBody"></div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────
+const i18n = {
+  ru: {
+    logo: 'სამზარეულო',
+    nav_title: 'Разделы',
+    nav_home: 'Главная',
+    hero_eyebrow: 'Грузинская Кухня · Кулинарная книга',
+    hero_title_line1: 'Рецепты ресторана',
+    cat_flour: 'Мучной цех',
+    cat_flour_desc: 'Хачапури, лобиани, пури',
+    cat_khinkali: 'Хинкали',
+    cat_khinkali_desc: 'Классические и авторские',
+    cat_pastry: 'Кондитерский цех',
+    cat_pastry_desc: 'Сладости и десерты',
+    cat_cold: 'Холодный цех',
+    cat_cold_desc: 'Закуски, салаты, пхали',
+    cat_hot: 'Горячий цех',
+    cat_hot_desc: 'Чакапули, харчо, сациви',
+    cat_grill: 'Шашлык',
+    cat_grill_desc: 'Мцвади и маринады',
+    back: '← Назад',
+    recipe_placeholder: 'Рецепт скоро',
+    time_label: 'мин',
+  },
+  es: {
+    logo: 'სამზარეულო',
+    nav_title: 'Secciones',
+    nav_home: 'Inicio',
+    hero_eyebrow: 'Cocina Georgiana · Libro de Recetas',
+    hero_title_line1: 'Recetas del restaurante',
+    cat_flour: 'Panadería',
+    cat_flour_desc: 'Khachapuri, lobiani, puri',
+    cat_khinkali: 'Khinkali',
+    cat_khinkali_desc: 'Clásicos y variaciones',
+    cat_pastry: 'Repostería',
+    cat_pastry_desc: 'Dulces y postres',
+    cat_cold: 'Platos Fríos',
+    cat_cold_desc: 'Aperitivos, ensaladas, pkhali',
+    cat_hot: 'Platos Calientes',
+    cat_hot_desc: 'Chakapuli, khartcho, satsivi',
+    cat_grill: 'Asados',
+    cat_grill_desc: 'Mtsvadi y marinadas',
+    back: '← Volver',
+    recipe_placeholder: 'Próximamente',
+    time_label: 'min',
+  }
+};
+
+// Mock recipe data — add your real recipes here
+const categories = {
+  flour: {
+    bg: 'bg-flour',
+    icon: '🌾',
+    name_ru: 'Мучной цех',
+    name_es: 'Panadería',
+    desc_ru: 'Хлеб, хачапури и традиционная выпечка',
+    desc_es: 'Pan, khachapuri y panadería tradicional',
+    recipes: [
+      {
+        name_ru: 'Лобиани', name_es: 'Lobiani',
+        tag_ru: 'Выпечка', tag_es: 'Panadería', emoji: '🥙',
+        ingredients_ru: [
+          'Фасоль — 2 кг',
+          'Сливочное масло — 250 г',
+          'Репчатый лук — 300 г',
+          'Кондари (чабер) — 6 г',
+          'Кориандр — 6 г',
+          'Черный перец — 8 г',
+          'Красный перец — 2 г',
+          'Уцхо-сунели — 7 г',
+          'Чеснок — 5 г',
+          'Соль — 25 г'
+        ],
+        ingredients_es: [
+          'Judías — 2 kg',
+          'Mantequilla — 250 g',
+          'Cebolla — 300 g',
+          'Ajedrea (kondari) — 6 g',
+          'Cilantro — 6 g',
+          'Pimienta negra — 8 g',
+          'Pimiento rojo — 2 g',
+          'Utskho suneli — 7 g',
+          'Ajo — 5 g',
+          'Sal — 25 g'
+        ]
+      },
+      {
+        name_ru: 'Тесто для хачапури и хлеба', name_es: 'Masa para khachapuri y pan',
+        tag_ru: 'Тесто', tag_es: 'Masa', emoji: '🍞',
+        ingredients_ru: [
+          'Мука — 5 кг (и дополнительно для густоты)',
+          'Молоко — 1,5 л',
+          'Теплая вода — 2,5 л',
+          'Растопленный маргарин — 400 г',
+          'Сахар — 100 г',
+          'Соль — 220 г',
+          'Дрожжи — 3 упаковки'
+        ],
+        ingredients_es: [
+          'Harina — 5 kg (y extra para espesar)',
+          'Leche — 1,5 l',
+          'Agua tibia — 2,5 l',
+          'Margarina derretida — 400 g',
+          'Azúcar — 100 g',
+          'Sal — 220 g',
+          'Levadura — 3 paquetes'
+        ]
+      },
+      {
+        name_ru: 'Кубдари', name_es: 'Kubdari',
+        tag_ru: 'Выпечка', tag_es: 'Panadería', emoji: '🥖',
+        ingredients_ru: [
+          'Мясная основа:',
+          'Говядина — 5 кг',
+          'Свинина — 3 кг',
+          'Сало — 500 г',
+          'Репчатый лук — 1,5 кг',
+          'Чеснок — 50 г',
+          'Специи и добавки:',
+          'Молотый кориандр — 75 г',
+          'Имеретинский шафран — 20 г',
+          'Уцхо-сунели — 75 г',
+          'Зира — 20 г',
+          'Сванская соль — 75 г',
+          'Черный перец — 25 г',
+          'Перец чили — 10 г',
+          'Аджика — 100 г',
+          'Соль — 100 г',
+          'Пиво — 600 мл'
+        ],
+        ingredients_es: [
+          'Base de carne:',
+          'Res — 5 kg',
+          'Cerdo — 3 kg',
+          'Tocino — 500 g',
+          'Cebolla — 1,5 kg',
+          'Ajo — 50 g',
+          'Especias y aditivos:',
+          'Cilantro molido — 75 g',
+          'Azafrán imereti — 20 g',
+          'Utskho suneli — 75 g',
+          'Comino — 20 g',
+          'Sal svana — 75 g',
+          'Pimienta negra — 25 g',
+          'Chile — 10 g',
+          'Adjika — 100 g',
+          'Sal — 100 g',
+          'Cerveza — 600 ml'
+        ],
+        steps_ru: [
+          'Мелко нарезать говядину, свинину и сало небольшими кубиками.',
+          'Мелко нарезать лук и измельчить чеснок.',
+          'Смешать мясо с луком, чесноком и всеми специями: кориандром, шафраном, уцхо-сунели, зирой, сванской солью, чёрным перцем и чили.',
+          'Добавить аджику и соль.',
+          'Влить пиво и хорошо перемешать начинку.',
+          'Оставить начинку на 12 часов, чтобы мясо пропиталось специями.'
+        ],
+        steps_es: [
+          'Cortar finamente la res, el cerdo y el tocino en cubos pequeños.',
+          'Cortar finamente la cebolla y picar el ajo.',
+          'Mezclar la carne con la cebolla, el ajo y todas las especias: cilantro, azafrán, utskho suneli, comino, sal svana, pimienta negra y chile.',
+          'Añadir la adjika y la sal.',
+          'Verter la cerveza y mezclar bien el relleno.',
+          'Dejar reposar el relleno 12 horas para que la carne se impregne de las especias.'
+        ]
+      }
+    ]
+  },
+  khinkali: {
+    bg: 'bg-khinkali',
+    icon: '🥟',
+    name_ru: 'Хинкали',
+    name_es: 'Khinkali',
+    desc_ru: 'Грузинские пельмени с различными начинками',
+    desc_es: 'Dumlings georgianos con diferentes rellenos',
+    recipes: [
+      {
+        name_ru: 'Хинкали «Микс»', name_es: 'Khinkali "Mix"',
+        tag_ru: 'Классика', tag_es: 'Clásico', emoji: '🥟',
+        ingredients_ru: [
+          'Мясная основа:',
+          'Говядина — 1 кг',
+          'Свинина — 500 г',
+          'Репчатый лук — 300 г',
+          'Сало — 100 г',
+          'Свежая кинза — 30 г',
+          'Петрушка — 10 г',
+          'Острый перец (свежий) — 25 г',
+          'Специи:',
+          'Зира — 5 г',
+          'Молотый кориандр — 10 г',
+          'Уцхо-сунели — 10 г',
+          'Черный перец — 5 г',
+          'Молотый чили — 1 г',
+          'Соль — 10 г',
+          'Бульон (для начинки):',
+          'Вода — 1,8 л',
+          'Бульонный порошок — 15 г'
+        ],
+        ingredients_es: [
+          'Base de carne:',
+          'Res — 1 kg',
+          'Cerdo — 500 g',
+          'Cebolla — 300 g',
+          'Tocino — 100 g',
+          'Cilantro fresco — 30 g',
+          'Perejil — 10 g',
+          'Chile fresco — 25 g',
+          'Especias:',
+          'Comino — 5 g',
+          'Cilantro molido — 10 g',
+          'Utskho suneli — 10 g',
+          'Pimienta negra — 5 g',
+          'Chile molido — 1 g',
+          'Sal — 10 g',
+          'Caldo (para el relleno):',
+          'Agua — 1,8 l',
+          'Caldo en polvo — 15 g'
+        ]
+      },
+      {
+        name_ru: 'Хинкали с бараниной', name_es: 'Khinkali de cordero',
+        tag_ru: 'Классика', tag_es: 'Clásico', emoji: '🥟',
+        ingredients_ru: [
+          'Мясная основа:',
+          'Баранина — 1 кг',
+          'Говяжий жир — 100 г',
+          'Репчатый лук — 200 г',
+          'Свежая кинза — 40 г',
+          'Петрушка — 20 г',
+          'Острый перец (свежий) — 25 г',
+          'Специи:',
+          'Зира — 20 г',
+          'Молотый кориандр — 15 г',
+          'Уцхо-сунели — 10 г',
+          'Черный перец — 5 г',
+          'Молотый чили — 1 г',
+          'Соль — 10 г',
+          'Бульон (для начинки):',
+          'Вода — 1,5 л',
+          'Бульонный порошок — 10 г'
+        ],
+        ingredients_es: [
+          'Base de carne:',
+          'Cordero — 1 kg',
+          'Grasa de res — 100 g',
+          'Cebolla — 200 g',
+          'Cilantro fresco — 40 g',
+          'Perejil — 20 g',
+          'Chile fresco — 25 g',
+          'Especias:',
+          'Comino — 20 g',
+          'Cilantro molido — 15 g',
+          'Utskho suneli — 10 g',
+          'Pimienta negra — 5 g',
+          'Chile molido — 1 g',
+          'Sal — 10 g',
+          'Caldo (para el relleno):',
+          'Agua — 1,5 l',
+          'Caldo en polvo — 10 g'
+        ]
+      },
+      {
+        name_ru: 'Хинкали с говядиной', name_es: 'Khinkali de res',
+        tag_ru: 'Классика', tag_es: 'Clásico', emoji: '🥟',
+        ingredients_ru: [
+          'Мясная основа:',
+          'Говядина — 1 кг',
+          'Репчатый лук — 200 г',
+          'Свежая кинза — 30 г',
+          'Петрушка — 10 г',
+          'Острый перец (свежий) — 25 г',
+          'Специи:',
+          'Молотый кориандр — 10 г',
+          'Зира — 5 г',
+          'Черный перец — 5 г',
+          'Уцхо-сунели — 10 г',
+          'Молотый чили — 1 г',
+          'Соль — 10 г',
+          'Бульон (для начинки):',
+          'Вода — 1,5 л',
+          'Бульонный порошок — 10 г'
+        ],
+        ingredients_es: [
+          'Base de carne:',
+          'Res — 1 kg',
+          'Cebolla — 200 g',
+          'Cilantro fresco — 30 g',
+          'Perejil — 10 g',
+          'Chile fresco — 25 g',
+          'Especias:',
+          'Cilantro molido — 10 g',
+          'Comino — 5 g',
+          'Pimienta negra — 5 g',
+          'Utskho suneli — 10 g',
+          'Chile molido — 1 g',
+          'Sal — 10 g',
+          'Caldo (para el relleno):',
+          'Agua — 1,5 l',
+          'Caldo en polvo — 10 g'
+        ]
+      },
+      {
+        name_ru: 'Тесто для хинкали', name_es: 'Masa para khinkali',
+        tag_ru: 'Тесто', tag_es: 'Masa', emoji: '🫙',
+        ingredients_ru: [
+          'Мука — 5 кг',
+          'Соль — 120 г',
+          'Очень холодная вода — 1,75 л',
+          '⚠ Замешивать 20 минут. Вода должна быть очень холодной.'
+        ],
+        ingredients_es: [
+          'Harina — 5 kg',
+          'Sal — 120 g',
+          'Agua muy fría — 1,75 l',
+          '⚠ Amasar durante 20 minutos. El agua debe estar muy fría.'
+        ]
+      }
+    ]
+  },
+  pastry: {
+    bg: 'bg-pastry',
+    icon: '🍰',
+    name_ru: 'Кондитерский цех',
+    name_es: 'Repostería',
+    desc_ru: 'Грузинские десерты и сладости',
+    desc_es: 'Postres y dulces georgianos',
+    recipes: [
+      {
+        name_ru: 'Птичье молоко', name_es: 'Leche de pájaro',
+        tag_ru: 'Десерт', tag_es: 'Postre', emoji: '🍰',
+        ingredients_ru: [
+          'Основа 1 (масляная):',
+          'Сливочное масло — 170 г',
+          'Сгущённое молоко — 250 г',
+          'Крем-сыр — 2 ст. л.',
+          'Ванилин — 1 щепотка',
+          'Соль — 1 щепотка',
+          'Основа 2 (белковая):',
+          'Яичный белок — 7 шт.',
+          'Сахар — 125 г',
+          'Лимонная кислота — 1 щепотка',
+          'Для стабилизации:',
+          'Желатин — 20–25 г',
+          'Вода — 200 мл'
+        ],
+        ingredients_es: [
+          'Base 1 (mantequilla):',
+          'Mantequilla — 170 g',
+          'Leche condensada — 250 g',
+          'Queso crema — 2 cda',
+          'Vainillina — 1 pizca',
+          'Sal — 1 pizca',
+          'Base 2 (proteína):',
+          'Clara de huevo — 7 uds',
+          'Azúcar — 125 g',
+          'Ácido cítrico — 1 pizca',
+          'Para estabilizar:',
+          'Gelatina — 20–25 g',
+          'Agua — 200 ml'
+        ]
+      },
+      {
+        name_ru: 'Универсальный крем', name_es: 'Crema universal',
+        tag_ru: 'Крем', tag_es: 'Crema', emoji: '🍮',
+        ingredients_ru: [
+          'Яйца — 7 шт.',
+          'Сахар — 600 г',
+          'Молоко — 3 л',
+          'Сливочное масло — 250 г',
+          'Мука — 550 г',
+          'Ваниль — по вкусу',
+          'Соль — 1 щепотка'
+        ],
+        ingredients_es: [
+          'Huevos — 7 uds',
+          'Azúcar — 600 g',
+          'Leche — 3 l',
+          'Mantequilla — 250 g',
+          'Harina — 550 g',
+          'Vainilla — al gusto',
+          'Sal — 1 pizca'
+        ],
+        steps_ru: [
+          'В кастрюлю налить 3 л молока, добавить сливочное масло и поставить на медленный огонь.',
+          'В отдельной миске смешать сахар, соль, яйца, ваниль, 200 мл молока и муку до однородной массы без комочков.',
+          'Когда молоко с маслом нагреется, постепенно влить в него подготовленную смесь, постоянно помешивая.',
+          'Варить на медленном огне, непрерывно помешивая, пока крем не загустеет.',
+          'Снять с огня и дать остыть.'
+        ],
+        steps_es: [
+          'Verter 3 l de leche en una cacerola, añadir la mantequilla y poner a fuego lento.',
+          'En un bol aparte, mezclar el azúcar, la sal, los huevos, la vainilla, 200 ml de leche y la harina hasta obtener una masa homogénea sin grumos.',
+          'Cuando la leche con mantequilla esté caliente, verter poco a poco la mezcla preparada, removiendo constantemente.',
+          'Cocinar a fuego lento, removiendo sin parar, hasta que la crema espese.',
+          'Retirar del fuego y dejar enfriar.'
+        ]
+      },
+      {
+        name_ru: 'Торт «Згапари»', name_es: 'Pastel "Zgapari"',
+        tag_ru: 'Торт', tag_es: 'Pastel', emoji: '🎂',
+        ingredients_ru: [
+          'Для теста:',
+          'Яйца — 6 шт.',
+          'Сахар — 400 г',
+          'Сливочное масло — 250 г',
+          'Молоко — 300 мл',
+          'Мед — 200 г',
+          'Какао-порошок — 8 больших ст. л.',
+          'Пищевая сода — 15 г',
+          'Уксус — 1 ст. л.',
+          'Соль — 10 г',
+          'Мука — 600 г',
+          'Для крема:',
+          'Готовый заварной крем — 1,5 кг',
+          'Сливочное масло — 500 г',
+          'Сгущенное молоко — 300 г',
+          'Ваниль — 15 г'
+        ],
+        ingredients_es: [
+          'Para la masa:',
+          'Huevos — 6 uds',
+          'Azúcar — 400 g',
+          'Mantequilla — 250 g',
+          'Leche — 300 ml',
+          'Miel — 200 g',
+          'Cacao en polvo — 8 cda grandes',
+          'Bicarbonato de sodio — 15 g',
+          'Vinagre — 1 cda',
+          'Sal — 10 g',
+          'Harina — 600 g',
+          'Para la crema:',
+          'Crema pastelera lista — 1,5 kg',
+          'Mantequilla — 500 g',
+          'Leche condensada — 300 g',
+          'Vainilla — 15 g'
+        ],
+        steps_ru: [
+          'Тесто: смешайте яйца с сахаром.',
+          'Тесто: добавьте растопленное сливочное масло, молоко и мед.',
+          'Тесто: добавьте какао-порошок и хорошо перемешайте.',
+          'Тесто: соду погасите уксусом и добавьте в смесь, пока она шипит.',
+          'Тесто: добавьте соль.',
+          'Тесто: постепенно всыпайте муку и замесите однородное тесто. Выпекайте согласно рецепту до готовности.',
+          'Крем: растопите сливочное масло и дайте ему немного остыть.',
+          'Крем: смешайте готовый заварной крем со сгущенным молоком.',
+          'Крем: добавьте ваниль и хорошо перемешайте.',
+          'Крем: постепенно влейте растопленное сливочное масло, постоянно перемешивая до получения однородного крема.'
+        ],
+        steps_es: [
+          'Masa: mezcle los huevos con el azúcar.',
+          'Masa: añada la mantequilla derretida, la leche y la miel.',
+          'Masa: añada el cacao en polvo y mezcle bien.',
+          'Masa: apague el bicarbonato con vinagre y añádalo a la mezcla mientras burbujea.',
+          'Masa: añada la sal.',
+          'Masa: incorpore poco a poco la harina y amase hasta obtener una masa homogénea. Hornee según la receta hasta que esté lista.',
+          'Crema: derrita la mantequilla y déjela enfriar un poco.',
+          'Crema: mezcle la crema pastelera lista con la leche condensada.',
+          'Crema: añada la vainilla y mezcle bien.',
+          'Crema: vierta poco a poco la mantequilla derretida, removiendo constantemente hasta obtener una crema homogénea.'
+        ]
+      },
+      {
+        name_ru: 'Крем «Наполеон»', name_es: 'Crema "Napoleón"',
+        tag_ru: 'Крем', tag_es: 'Crema', emoji: '🍰',
+        ingredients_ru: [
+          'Готовый заварной крем — 1,5 кг',
+          'Сливки для взбивания — ± 300 г',
+          'Сгущенное молоко — ± 250 г',
+          'Ваниль — 10 г',
+          'Соль — 5 г'
+        ],
+        ingredients_es: [
+          'Crema pastelera lista — 1,5 kg',
+          'Nata para montar — ± 300 g',
+          'Leche condensada — ± 250 g',
+          'Vainilla — 10 g',
+          'Sal — 5 g'
+        ],
+        steps_ru: [
+          'В готовый остывший заварной крем добавьте сливки.',
+          'Добавьте сгущенное молоко, соль и ваниль, после чего хорошо перемешайте массу до однородности.'
+        ],
+        steps_es: [
+          'A la crema pastelera ya fría, añada la nata.',
+          'Añada la leche condensada, la sal y la vainilla, y mezcle bien hasta obtener una masa homogénea.'
+        ]
+      },
+      {
+        name_ru: 'Крем для Медовика', name_es: 'Crema para Medovik',
+        tag_ru: 'Крем', tag_es: 'Crema', emoji: '🍯',
+        ingredients_ru: [
+          'Сливочный сыр — 1,3 кг',
+          'Греческий йогурт — 1 кг',
+          'Сливочное масло — 500 г',
+          'Сахар — 400 г',
+          'Мед — 300 г',
+          'Ваниль — 10 г',
+          'Соль — 1 щепотка'
+        ],
+        ingredients_es: [
+          'Queso crema — 1,3 kg',
+          'Yogur griego — 1 kg',
+          'Mantequilla — 500 g',
+          'Azúcar — 400 g',
+          'Miel — 300 g',
+          'Vainilla — 10 g',
+          'Sal — 1 pizca'
+        ],
+        steps_ru: [
+          'Взбить сливочный сыр, после чего добавить размягченное сливочное масло и греческий йогурт.',
+          'Постепенно добавить сахар и продолжать взбивать массу.',
+          'Добавить мед, ваниль и щепотку соли.',
+          'Взбить все до получения однородного, гладкого крема.'
+        ],
+        steps_es: [
+          'Batir el queso crema, luego añadir la mantequilla blanda y el yogur griego.',
+          'Añadir poco a poco el azúcar y seguir batiendo la mezcla.',
+          'Añadir la miel, la vainilla y una pizca de sal.',
+          'Batir todo hasta obtener una crema homogénea y suave.'
+        ]
+      },
+      {
+        name_ru: 'Пахлава', name_es: 'Pajlava',
+        tag_ru: 'Выпечка', tag_es: 'Pastelería', emoji: '🥮',
+        ingredients_ru: [
+          'Для теста:',
+          'Мука — 650 г',
+          'Холодное сливочное масло — 300 г',
+          'Йогурт — 400 г',
+          'Яичные желтки — 3 шт.',
+          'Пищевая сода — 1 ч. л.',
+          'Соль — 8 г',
+          'Для начинки:',
+          'Измельченные грецкие орехи — 300 г',
+          'Сахар — 300 г',
+          'Изюм — 150 г',
+          'Яичные белки — 4 шт.',
+          'Соль — 1 щепотка',
+          'Для украшения и смазывания:',
+          'Греческий йогурт — 50 г',
+          'Яичный желток — 1 шт.',
+          'Грецкие орехи (целые) — для украшения',
+          'Мед — для поливки (по вкусу)'
+        ],
+        ingredients_es: [
+          'Para la masa:',
+          'Harina — 650 g',
+          'Mantequilla fría — 300 g',
+          'Yogur — 400 g',
+          'Yemas de huevo — 3 uds',
+          'Bicarbonato de sodio — 1 cdta',
+          'Sal — 8 g',
+          'Para el relleno:',
+          'Nueces picadas — 300 g',
+          'Azúcar — 300 g',
+          'Pasas — 150 g',
+          'Claras de huevo — 4 uds',
+          'Sal — 1 pizca',
+          'Para decorar y pintar:',
+          'Yogur griego — 50 g',
+          'Yema de huevo — 1 ud',
+          'Nueces (enteras) — para decorar',
+          'Miel — para rociar (al gusto)'
+        ],
+        steps_ru: [
+          'Тесто: смешать муку и соль. Добавить холодное сливочное масло, натертое на терке, и перетереть все в рассыпчатую крошку.',
+          'Тесто: добавить 3 желтка и слегка перемешать.',
+          'Тесто: отдельно смешать йогурт с содой, влить в массу и замесить тесто (долго вымешивать не нужно).',
+          'Тесто: убрать тесто в холодильник на 10 минут.',
+          'Начинка: взбить 4 белка со щепоткой соли и сахаром.',
+          'Начинка: аккуратно подмешать измельченные грецкие орехи и изюм.',
+          'Начинка: разделить готовую начинку на 3 равные части.',
+          'Сборка: разделить охлажденное тесто на 3 равные части и тонко раскатать их.',
+          'Сборка: выложить первый пласт теста, распределить часть начинки и повторить слои, чередуя тесто и начинку.',
+          'Сборка: нарезать сформированную пахлаву на порционные ромбики.',
+          'Сборка: смешать 1 желток с 50 г греческого йогурта и смазать поверхность пахлавы.',
+          'Сборка: на каждый кусочек по центру выложить по целому грецкому ореху.',
+          'Сборка: выпекать в разогретой духовке при температуре 180°C в течение 30–35 минут.',
+          'Сборка: горячую пахлаву сразу после выпечки полить медом.'
+        ],
+        steps_es: [
+          'Masa: mezclar la harina y la sal. Añadir la mantequilla fría rallada y desmenuzar todo hasta obtener una textura de migas.',
+          'Masa: añadir 3 yemas y mezclar ligeramente.',
+          'Masa: por separado, mezclar el yogur con el bicarbonato, incorporarlo a la masa y amasar (sin trabajar demasiado).',
+          'Masa: dejar la masa en el refrigerador durante 10 minutos.',
+          'Relleno: batir las 4 claras con una pizca de sal y el azúcar.',
+          'Relleno: incorporar con cuidado las nueces picadas y las pasas.',
+          'Relleno: dividir el relleno en 3 partes iguales.',
+          'Montaje: dividir la masa fría en 3 partes iguales y estirarlas finamente.',
+          'Montaje: colocar la primera capa de masa, distribuir parte del relleno y repetir las capas alternando masa y relleno.',
+          'Montaje: cortar la pajlava formada en rombos individuales.',
+          'Montaje: mezclar 1 yema con 50 g de yogur griego y pintar la superficie de la pajlava.',
+          'Montaje: colocar una nuez entera en el centro de cada pieza.',
+          'Montaje: hornear en el horno precalentado a 180°C durante 30–35 minutos.',
+          'Montaje: rociar la pajlava caliente con miel justo después de hornear.'
+        ]
+      }
+    ]
+  },
+  cold: {
+    bg: 'bg-cold',
+    icon: '🥗',
+    name_ru: 'Холодный цех',
+    name_es: 'Platos Fríos',
+    desc_ru: 'Закуски, салаты и холодные блюда',
+    desc_es: 'Aperitivos, ensaladas y platos fríos',
+    recipes: []
+  },
+  hot: {
+    bg: 'bg-hot',
+    icon: '🔥',
+    name_ru: 'Горячий цех',
+    name_es: 'Platos Calientes',
+    desc_ru: 'Супы, рагу и горячие блюда',
+    desc_es: 'Sopas, guisos y platos calientes',
+    recipes: []
+  },
+  grill: {
+    bg: 'bg-grill',
+    icon: '🍖',
+    name_ru: 'Шашлык',
+    name_es: 'Asados',
+    desc_ru: 'Мцвади, маринады и блюда на огне',
+    desc_es: 'Mtsvadi, marinadas y cocina al fuego',
+    recipes: []
+  }
+};
+
+// ── STATE ──────────────────────────────────────────────────────────
+let currentLang = 'ru';
+
+// ── ANALYTICS (add your script) ────────────────────────────────────
+function trackEvent(name, params) {
+  // Replace with: gtag('event', name, params); or ym(XXXXXX, 'reachGoal', name);
+  console.log('[analytics]', name, params);
+}
+trackEvent('page_view', { device: window.innerWidth < 768 ? 'mobile' : 'desktop' });
+
+// ── LANG ───────────────────────────────────────────────────────────
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('langRu').classList.toggle('active', lang === 'ru');
+  document.getElementById('langEs').classList.toggle('active', lang === 'es');
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (i18n[lang][key] !== undefined) el.innerHTML = i18n[lang][key];
+  });
+
+  trackEvent('lang_switch', { lang });
+}
+
+// ── SIDEBAR ────────────────────────────────────────────────────────
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('burgerBtn').classList.remove('open');
+  document.getElementById('burgerBtn').setAttribute('aria-expanded', 'false');
+}
+
+document.getElementById('burgerBtn').addEventListener('click', () => {
+  const open = document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open', open);
+  document.getElementById('burgerBtn').classList.toggle('open', open);
+  document.getElementById('burgerBtn').setAttribute('aria-expanded', open);
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeSidebar(); closeRecipe(); }
+});
+
+// ── RECIPE MODAL ───────────────────────────────────────────────────
+function openRecipe(catId, idx) {
+  const cat = categories[catId];
+  const r = cat.recipes[idx];
+  const lang = currentLang;
+  const ingredients = r['ingredients_' + lang] || [];
+
+  const isSubHeader = (line) => line.trim().endsWith(':');
+
+  const listItems = ingredients.map(line =>
+    isSubHeader(line)
+      ? `<li class="sub-header">${line}</li>`
+      : `<li>${line}</li>`
+  ).join('');
+
+  const steps = r['steps_' + lang] || [];
+  const stepsHtml = steps.length ? `
+    <p class="modal-section-label">${lang === 'ru' ? 'Приготовление' : 'Preparación'}</p>
+    <ol class="modal-steps-list">${steps.map(s => {
+      const m = s.match(/^([^:]{2,15}):\s*(.*)$/);
+      const formatted = m ? `<span class="step-prefix">${m[1]}:</span> ${m[2]}` : s;
+      return `<li>${formatted}</li>`;
+    }).join('')}</ol>
+  ` : '';
+
+  document.getElementById('recipeModalBody').innerHTML = `
+    <div class="modal-emoji">${r.emoji}</div>
+    <h2 class="modal-title" id="recipeModalTitle">${r['name_' + lang]}</h2>
+    <span class="modal-tag">${r['tag_' + lang]}</span>
+    <p class="modal-section-label">${lang === 'ru' ? 'Ингредиенты' : 'Ingredientes'}</p>
+    <ul class="modal-ing-list">${listItems}</ul>
+    ${stepsHtml}
+  `;
+
+  document.getElementById('recipeOverlay').classList.add('open');
+  document.getElementById('recipeModal').classList.add('open');
+  trackEvent('recipe_open', { category: catId, recipe: r['name_' + lang], lang });
+}
+
+function closeRecipe() {
+  document.getElementById('recipeOverlay').classList.remove('open');
+  document.getElementById('recipeModal').classList.remove('open');
+}
+
+// ── NAVIGATION ─────────────────────────────────────────────────────
+function showHome(e) {
+  e && e.preventDefault();
+  document.getElementById('homeView').style.display = 'flex';
+  document.getElementById('sectionView').style.display = 'none';
+  closeSidebar();
+  window.scrollTo(0, 0);
+}
+
+function showSection(e, id) {
+  e && e.preventDefault();
+  const cat = categories[id];
+  const lang = currentLang;
+  const t = i18n[lang];
+
+  const recipes = cat.recipes.length ? cat.recipes.map((r, i) => `
+    <article class="recipe-card" style="animation-delay:${0.05 + i * 0.05}s" 
+             role="button" tabindex="0" aria-label="${r['name_' + lang]}"
+             onclick="openRecipe('${id}', ${i})" onkeydown="if(event.key==='Enter')openRecipe('${id}', ${i})">
+      <div class="card-img">
+        <span class="card-placeholder-text">${r.emoji}</span>
+      </div>
+      <div class="card-body">
+        <p class="card-name">${r['name_' + lang]}</p>
+        <span class="card-tag">${r['tag_' + lang]}</span>
+      </div>
+    </article>
+  `).join('') : `
+    <div style="grid-column: 1/-1; text-align:center; padding: 48px 16px; color: var(--text-muted);">
+      <p style="font-size:14px; font-weight:300;">${lang === 'ru' ? 'Рецепты скоро появятся здесь' : 'Las recetas aparecerán aquí pronto'}</p>
+    </div>
+  `;
+
+  document.getElementById('sectionView').innerHTML = `
+    <div class="${cat.bg}" style="min-height:100svh;">
+      <section class="section-hero" aria-label="${cat['name_' + lang]}">
+        <button class="back-btn" onclick="showHome(event)" aria-label="${t.back}">
+          ${t.back}
+        </button>
+        <h1 class="section-title">${cat.icon} <em>${cat['name_' + lang]}</em></h1>
+        <p class="section-desc">${cat['desc_' + lang]}</p>
+      </section>
+      <div class="recipe-grid" role="list" aria-label="Список рецептов">
+        ${recipes}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('homeView').style.display = 'none';
+  document.getElementById('sectionView').style.display = 'block';
+  closeSidebar();
+  window.scrollTo(0, 0);
+
+  trackEvent('section_open', { section: id, lang });
+}
+</script>
+</body>
+</html>
