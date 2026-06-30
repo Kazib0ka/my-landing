@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кондитерский цех · Batumi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Analytics placeholder: replace with your tracking code -->
+<!-- Google Analytics: <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script> -->
+<!-- Yandex Metrica: paste counter code here -->
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header>
+  <button class="burger" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <a href="index.html" class="logo" data-i18n="logo">Batumi</a>
+
+  <div class="lang-switcher" role="group" aria-label="Выбор языка">
+    <button class="lang-btn active" id="langRu" onclick="setLang('ru')" aria-label="Русский" title="Русский">🇷🇺</button>
+    <button class="lang-btn" id="langEs" onclick="setLang('es')" aria-label="Español" title="Español">🇪🇸</button>
+  </div>
+</header>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<nav class="sidebar" id="sidebar" aria-label="Основная навигация">
+  <p class="sidebar-title" data-i18n="nav_title">Разделы</p>
+  <a href="index.html" class="sidebar-link">
+    <span class="icon">🏠</span><span data-i18n="nav_home">Главная</span>
+  </a>
+  <a href="flour.html" class="sidebar-link">
+    <span class="icon">🌾</span><span data-i18n="cat_flour">Мучной цех</span>
+  </a>
+  <a href="khinkali.html" class="sidebar-link">
+    <span class="icon">🥟</span><span data-i18n="cat_khinkali">Хинкали</span>
+  </a>
+  <a href="pastry.html" class="sidebar-link">
+    <span class="icon">🍰</span><span data-i18n="cat_pastry">Кондитерский цех</span>
+  </a>
+  <a href="cold.html" class="sidebar-link">
+    <span class="icon">🥗</span><span data-i18n="cat_cold">Холодный цех</span>
+  </a>
+  <a href="hot.html" class="sidebar-link">
+    <span class="icon">🔥</span><span data-i18n="cat_hot">Горячий цех</span>
+  </a>
+  <a href="grill.html" class="sidebar-link">
+    <span class="icon">🍖</span><span data-i18n="cat_grill">Шашлык</span>
+  </a>
+</nav>
+
+<!-- ═══════════════ SECTION PAGE ═══════════════ -->
+<div class="bg-pastry" style="min-height:100svh;">
+  <section class="section-hero" aria-label="Кондитерский цех">
+    <a href="index.html" class="back-btn" data-i18n="back" aria-label="Назад">← Назад</a>
+    <h1 class="section-title" id="sectionTitle">🍰 <em>Кондитерский цех</em></h1>
+    <p class="section-desc" id="sectionDesc">Грузинские десерты и сладости</p>
+  </section>
+  <div class="recipe-grid" id="recipeGrid" role="list" aria-label="Список рецептов">
+    <!-- rendered by app.js -->
+  </div>
+</div>
+
+<!-- ═══════════════ RECIPE MODAL ═══════════════ -->
+<div class="modal-overlay" id="recipeOverlay" onclick="closeRecipe()"></div>
+<div class="recipe-modal" id="recipeModal" role="dialog" aria-modal="true" aria-labelledby="recipeModalTitle">
+  <button class="modal-close" onclick="closeRecipe()" aria-label="Закрыть">✕</button>
+  <div id="recipeModalBody"></div>
+</div>
+
+<script src="data.js"></script>
+<script>const CATEGORY_ID = 'pastry';</script>
+<script src="app.js"></script>
+</body>
+</html>
