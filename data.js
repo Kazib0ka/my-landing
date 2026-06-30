@@ -260,7 +260,7 @@ const categories = {
         ]
       },
       {
-        name_ru: 'Хинкали с говядиной', name_es: 'Khinkali de res',
+        name_ru: 'Хинкали с говядиной', name_es: 'Khinkali de Ternera',
         tag_ru: 'Классика', tag_es: 'Clásico', emoji: '🥟',
         ingredients_ru: [
           'Мясная основа:',
